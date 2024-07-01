@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="happyComponent" class="com.afeibaili.ioc_1.HappyComponent"/>
+
+    <!--静态工厂配置-->
+    <bean id="clientService" class="com.afeibaili.ioc_1.ClientService" factory-method="createClientService"/>
+    <!--非静态工厂配置-->
+    <bean id="defaultServiceLocator" class="com.afeibaili.ioc_1.DefaultServiceLocator"/>
+    <bean id="clientService2" factory-bean="defaultServiceLocator" factory-method="createClientService"/>
+</beans>

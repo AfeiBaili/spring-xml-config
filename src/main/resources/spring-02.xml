@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--单个构造参数注入-->
+    <bean id="userDao" class="com.afeibaili.ioc_2.UserDao"/>
+    <!--将userDao传入构造参数中-->
+    <bean id="userService" class="com.afeibaili.ioc_2.UserService">
+        <constructor-arg ref="userDao"/>
+    </bean>
+    <!--多个构造参数注入-->
+    <!--1.有序多个构造参数-->
+    <bean id="userService2" class="com.afeibaili.ioc_2.UserService">
+        <constructor-arg ref="userDao"/>
+        <constructor-arg value="张三"/>
+        <constructor-arg value="18"/>
+    </bean>
+    <!--2.通过参数名匹配参数，循序可以不一样-->
+    <bean id="userService3" class="com.afeibaili.ioc_2.UserService">
+        <constructor-arg name="userDao" ref="userDao"/>
+        <constructor-arg name="age" value="18"/>
+        <constructor-arg name="name" value="张三"/>
+    </bean>
+    <!--2.通过参数下角标匹配参数，循序可以不一样-->
+    <bean id="userService4" class="com.afeibaili.ioc_2.UserService">
+        <constructor-arg index="0" ref="userDao"/>
+        <constructor-arg index="2" value="18"/>
+        <constructor-arg index="1" value="张三"/>
+    </bean>
+
+    <!--setter方法注入-->
+    <bean id="finder" class="com.afeibaili.ioc_2.MovieFinder"/>
+    <bean id="simpleMovieLister" class="com.afeibaili.ioc_2.SimpleMovieLister">
+        <property name="movieFinder" ref="finder"/>
+        <property name="name" value="我的世界"/>
+    </bean>
+</beans>
